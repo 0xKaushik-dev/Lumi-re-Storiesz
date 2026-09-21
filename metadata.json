@@ -1,0 +1,7 @@
+{
+  "name": "Lumière Stories",
+  "description": "Documentary & Fine Art Photography Studio monograph, portfolio archives, editorial field notes, and commission inquiries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
