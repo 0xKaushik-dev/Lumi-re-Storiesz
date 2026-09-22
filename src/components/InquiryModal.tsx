@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { X, Check, Calendar, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
+import { X, Check, Calendar, MapPin, ArrowRight, ArrowLeft, MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface InquiryModalProps {
   initialDiscipline?: string;
   onClose: () => void;
 }
+
+const STUDIO_WHATSAPP_NUMBER = '917735791248';
 
 export default function InquiryModal({ initialDiscipline = 'Weddings', onClose }: InquiryModalProps) {
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function InquiryModal({ initialDiscipline = 'Weddings', onClose }
     referral: 'Editorial Feature / Publication'
   });
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [whatsappLink, setWhatsappLink] = useState<string>('');
 
   const handleChange = (field: string, val: string) => {
     setFormData((prev) => ({ ...prev, [field]: val }));
@@ -48,10 +51,49 @@ export default function InquiryModal({ initialDiscipline = 'Weddings', onClose }
     if (step > 1) setStep(step - 1);
   };
 
+  const generateWhatsAppMessage = (ref: string, data: typeof formData) => {
+    const parts: string[] = [
+      `✨ *COMMISSION INQUIRY — LUMIÈRE STORIES* ✨`,
+      `*Reference:* ${ref}`,
+      ``,
+      `👤 *Client Information:*`,
+      `• Name: ${data.fullName || 'Not provided'}`,
+      data.partnerName ? `• Partner / Co-Host: ${data.partnerName}` : '',
+      `• Email: ${data.email || 'Not provided'}`,
+      `• Phone: ${data.phone || 'Not provided'}`,
+      data.referral ? `• Discovered via: ${data.referral}` : '',
+      ``,
+      `🎞️ *Celebration & Commission:*`,
+      `• Discipline: ${data.celebrationType}`,
+      `• Commission Season: ${data.season}`,
+      `• Anticipated Date / Timing: ${data.date || 'To be determined'}`,
+      `• Destination / Venue: ${data.location || 'To be determined'}`,
+      `• Estimated Guest Assembly: ${data.guestCount}`,
+      `• Analog Film Focus: ${data.filmPreference}`,
+    ];
+
+    if (data.storyVision && data.storyVision.trim()) {
+      parts.push(``, `📝 *Story Vision & Celebratory Notes:*\n${data.storyVision.trim()}`);
+    }
+
+    return parts.filter(Boolean).join('\n');
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const randomRef = `LS-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const message = generateWhatsAppMessage(randomRef, formData);
+    const url = `https://wa.me/${STUDIO_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
     setSubmittedRef(randomRef);
+    setWhatsappLink(url);
+
+    // Automatically trigger WhatsApp in a new tab/window
+    try {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch {
+      // In case browser blocks popup, user has the fallback link in the confirmation view
+    }
   };
 
   return (
@@ -87,34 +129,46 @@ export default function InquiryModal({ initialDiscipline = 'Weddings', onClose }
         {submittedRef ? (
           /* Submission Confirmation View */
           <div className="space-y-6 text-center py-6 animate-fadeIn">
-            <div className="w-12 h-12 bg-[#0e0d0b] text-white flex items-center justify-center mx-auto">
-              <Check size={24} />
+            <div className="w-14 h-14 bg-[#25D366] text-white flex items-center justify-center mx-auto rounded-full shadow-lg">
+              <Check size={28} />
             </div>
 
             <div className="space-y-2">
               <span className="font-label-editorial text-label-editorial uppercase tracking-[0.3em] text-[#7a776f]">
-                Inquiry Received
+                Commission Inquiry Transmitted
               </span>
               <h3 className="font-headline-lg text-headline-md text-[#0e0d0b]">
                 Thank you, {formData.fullName}.
               </h3>
               <p className="font-body-md text-[#494740] max-w-md mx-auto">
-                Julien and the studio will review your celebration details and reply within 48 hours with current calendar availability and our full Commission Dossier.
+                Your inquiry has been formatted and opened directly in WhatsApp to studio dispatch (<strong className="text-[#0e0d0b]">+91 7735791248</strong>).
               </p>
             </div>
 
-            <div className="p-4 bg-[#f4f3f0] border border-[#cac6bd]/40 max-w-sm mx-auto text-left text-xs space-y-1 font-mono">
+            <div className="p-4 bg-[#f4f3f0] border border-[#cac6bd]/40 max-w-sm mx-auto text-left text-xs space-y-1.5 font-mono">
               <div className="text-[#7a776f] uppercase">Commission Reference:</div>
               <div className="text-[#0e0d0b] font-bold text-sm tracking-wider">{submittedRef}</div>
               <div className="text-[#494740] pt-1">Type: {formData.celebrationType}</div>
               <div className="text-[#494740]">Destination: {formData.location || 'To Be Determined'}</div>
+              <div className="text-[#0e0d0b] font-semibold pt-1">WhatsApp Recipient: +91 7735791248</div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              {whatsappLink && (
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-7 py-3 bg-[#25D366] hover:bg-[#1faa4b] text-white font-label-editorial text-label-editorial uppercase tracking-[0.2em] transition-all inline-flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                >
+                  <MessageCircle size={16} />
+                  <span>Open WhatsApp Chat</span>
+                </a>
+              )}
               <button
                 type="button"
                 onClick={onClose}
-                className="px-8 py-3 bg-[#0e0d0b] text-white font-label-editorial text-label-editorial uppercase tracking-[0.2em] hover:bg-[#494740] transition-colors cursor-pointer"
+                className="w-full sm:w-auto px-7 py-3 bg-[#0e0d0b] text-white font-label-editorial text-label-editorial uppercase tracking-[0.2em] hover:bg-[#494740] transition-colors cursor-pointer"
               >
                 Return to Studio
               </button>
@@ -397,13 +451,20 @@ export default function InquiryModal({ initialDiscipline = 'Weddings', onClose }
               ) : (
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-8 py-3 bg-[#0e0d0b] text-white font-label-editorial text-label-editorial uppercase tracking-[0.24em] hover:bg-[#6b5c4d] transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-[#0e0d0b] text-white font-label-editorial text-label-editorial uppercase tracking-[0.22em] hover:bg-[#25D366] hover:text-white transition-all cursor-pointer shadow-sm group"
                 >
-                  <span>Submit Commission Inquiry</span>
-                  <Check size={14} />
+                  <MessageCircle size={15} className="text-[#25D366] group-hover:text-white transition-colors" />
+                  <span>Send via WhatsApp</span>
+                  <ArrowRight size={13} />
                 </button>
               )}
             </div>
+
+            {step === 4 && (
+              <p className="text-[11px] text-[#7a776f] text-center tracking-wide font-sans pt-1">
+                Submitting will automatically format and send your inquiry details to studio dispatch on WhatsApp (<span className="text-[#0e0d0b] font-medium">+91 7735791248</span>).
+              </p>
+            )}
           </form>
         )}
       </motion.div>
