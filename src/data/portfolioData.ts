@@ -1,15 +1,15 @@
 import { Story, Discipline, JournalArticle, MonographPlate } from '../types';
 
-export const HERO_IMAGE = "https://lh3.googleusercontent.com/aida/AEtjO1U24DhcjmqTG7ybcPKC5C_8iNobzkrIIeuTldkVvyzbu08Rf1b1nMP5zKGgSwxGmGOp_W9xj9oPjRArWD8hsqZNeVoDws1M_lui94F15OJuNCCZM9M1ghZ0TUosiNPGJ_27jVmt8L0MZDdLhVLLtuQQCOllBhdJc4WhDH1rV6mlpeOqk_pJs2vgOfAFu9eRO_iU6WxAEJzsXVUjDyrflyrIAjGimPOQbzQh8IW31clgrnMig2BgBlcDnCk";
-export const BANQUET_IMAGE = "https://lh3.googleusercontent.com/aida/AEtjO1XEudKadM6y_d__u5OJWRhXpIwnLbIclRe95cOpuxOVahtJmHxG71wnIKXN9Dc3Fd7FleAA_4dGgK2BVchQ7mnagVNM0kBVyMo2FMKJBKqz2aprFH3xUqBlOBJ1rsIk16nR2JN9hn9t-bkTZkkvAw8pspaSjkfpQWCSOTlRJ-BNI5-_ueHlsjcN-8wNd1VTDbAujDDUF6wCp1gtkELzYQmQg6HvpI3PfIbSKIAqwYQ7QU2gKFfp5AxUvA";
-export const HANDS_RINGS_IMAGE = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80";
-export const STATIONERY_IMAGE = "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80";
-export const JULIEN_IMAGE = "https://lh3.googleusercontent.com/aida/AEtjO1VTeo01WHhk67ohCZARVORdDJNZ3iKjBVhWCJaJxT9Isizbx5-gMUzhjtCP_XY-MTDH1sUaESxdJKWi2rAch8H4qNbB5KY1eqCYE17DJZjrdivJg9V_aM9oPXEgKtULspWdiMV4iMDnGQSALllvNQO-gInFucC8eY717FWCLetDiBxK1MP03BpdmaFoZhuTJyugW0iOgxTZqNGbdVoT0L1jKg4jkJMbUfCRZzTfkuaya_Ij4wdf8mBYvWQ";
-export const COURTYARD_VOWS_IMAGE = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80";
-export const TABLE_DETAIL_IMAGE = "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80";
-export const TOAST_IMAGE = "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80";
-export const ELDERLY_DANCE_IMAGE = "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80";
-export const ARCHWAY_IMAGE = "https://images.unsplash.com/photo-1544077960-604201fe74bc?auto=format&fit=crop&w=1200&q=80";
+export const HERO_IMAGE = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85";
+export const BANQUET_IMAGE = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=85";
+export const HANDS_RINGS_IMAGE = "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=85";
+export const STATIONERY_IMAGE = "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=85";
+export const JULIEN_IMAGE = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85";
+export const COURTYARD_VOWS_IMAGE = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=85";
+export const TABLE_DETAIL_IMAGE = "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=85";
+export const TOAST_IMAGE = "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=85";
+export const ELDERLY_DANCE_IMAGE = "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=85";
+export const ARCHWAY_IMAGE = "https://images.unsplash.com/photo-1509924603848-aca550f9fc03?auto=format&fit=crop&w=1200&q=85";
 
 export const STORIES: Story[] = [
   {
@@ -36,7 +36,7 @@ export const STORIES: Story[] = [
     location: 'Bhubaneswar, India',
     date: 'Nov 2026',
     category: 'weddings',
-    image: HERO_IMAGE,
+    image: 'https://images.unsplash.com/photo-1544077960-604201fe74bc?auto=format&fit=crop&w=1200&q=85',
     aspectRatio: '4/5',
     colSpan: 'lg:col-span-5',
     plateCaption: 'Morning quietude framed in sandstone archway as soft light spills onto hand-woven silk',
@@ -210,7 +210,7 @@ export const NARRATIVE_CHAPTERS = [
     title: 'Preparation',
     subtitle: 'Quiet anticipation & morning light.',
     description: 'The hush before the crowd gathers. Soft morning daylight crossing the stone sills, the scent of linen and bergamot, hands adjusting cufflinks, quiet glances with a parent.',
-    image: HERO_IMAGE
+    image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=85'
   },
   {
     chapter: 'Chapter II',
@@ -218,7 +218,7 @@ export const NARRATIVE_CHAPTERS = [
     title: 'The Vows',
     subtitle: 'Grounded vows & silent emotion.',
     description: 'The emotional gravity of spoken commitment. We step back to give the moment dignity, capturing tears, clasped hands, and the shared exhale of unity.',
-    image: COURTYARD_VOWS_IMAGE
+    image: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=85'
   },
   {
     chapter: 'Chapter III',
@@ -234,7 +234,7 @@ export const NARRATIVE_CHAPTERS = [
     title: 'The Celebration',
     subtitle: 'Uninhibited laughter & late-night dancing.',
     description: 'As twilight falls, conversations deepen over wine and laughter echoes across long tables. The formal gives way to true uninhibited joy beneath warm bulb filaments.',
-    image: BANQUET_IMAGE
+    image: 'https://images.unsplash.com/photo-1470753937643-efeb931202a9?auto=format&fit=crop&w=1200&q=85'
   }
 ];
 
@@ -245,7 +245,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     category: 'Insights',
     date: 'Oct 2026',
     readTime: '6 min read',
-    image: HERO_IMAGE,
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85',
     excerpt: 'Why we still insist on hand-sequencing each wedding as a physical book, from paper grammage to the rhythm of blank pages.',
     paragraphs: [
       'In an era where thousands of digital photographs vanish into cloud drives rarely revisited, the bound monograph is an act of defiance. It says: this day existed, this room was warm, these people loved you, and their faces are anchored in ink.',
@@ -276,7 +276,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     category: 'Travel & Notes',
     date: 'Jun 2026',
     readTime: '5 min read',
-    image: BANQUET_IMAGE,
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85',
     excerpt: 'Reflections from three days of documenting a multi-generational gathering in the temple city of Bhubaneswar.',
     paragraphs: [
       'The golden hour in eastern India possesses a warmth unlike anywhere else on earth. The dust turns to amber, marigold garlands release their pungent fragrance into the humid dusk air, and the sound of conch shells signals the beginning of sacred vows.',
@@ -288,7 +288,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
 ];
 
 export const CONTACT_STRIP_ITEMS = [
-  { id: 1, title: 'Frame 01 — Morning Sill', image: HERO_IMAGE, tag: '35mm Tri-X' },
+  { id: 1, title: 'Frame 01 — Morning Sill', image: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80', tag: '35mm Tri-X' },
   { id: 2, title: 'Frame 02 — Communal Toast', image: BANQUET_IMAGE, tag: 'Portra 400' },
   { id: 3, title: 'Frame 03 — Julien at Work', image: JULIEN_IMAGE, tag: 'Leica M6' },
   { id: 4, title: 'Frame 04 — Golden Coupe', image: TOAST_IMAGE, tag: 'Tri-X Pushed' },
