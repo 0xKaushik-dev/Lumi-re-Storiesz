@@ -9,7 +9,7 @@ export const COURTYARD_VOWS_IMAGE = "https://images.unsplash.com/photo-151128556
 export const TABLE_DETAIL_IMAGE = "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=85";
 export const TOAST_IMAGE = "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=85";
 export const ELDERLY_DANCE_IMAGE = "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=85";
-export const ARCHWAY_IMAGE = "https://images.unsplash.com/photo-1509924603848-aca550f9fc03?auto=format&fit=crop&w=1200&q=85";
+export const ARCHWAY_IMAGE = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85";
 
 export const STORIES: Story[] = [
   {
