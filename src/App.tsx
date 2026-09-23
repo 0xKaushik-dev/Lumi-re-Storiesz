@@ -147,8 +147,8 @@ export default function App() {
           targetY = window.scrollY;
         }
 
-        // 52% total scroll speed reduction (0.48 multiplier)
-        targetY += deltaY * 0.48;
+        // Mobile/Touch scroll speed (0.672 multiplier: increased mobile scroll speed by 40%)
+        targetY += deltaY * 0.672;
 
         if (!isRunning) {
           isRunning = true;
@@ -167,7 +167,7 @@ export default function App() {
       }
 
       if (Math.abs(touchVelocityY) > 0.05) {
-        const momentum = touchVelocityY * 120 * 0.48;
+        const momentum = touchVelocityY * 120 * 0.672;
         targetY += momentum;
 
         const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
