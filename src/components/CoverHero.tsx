@@ -90,7 +90,7 @@ export default function CoverHero({ onExploreClick, onOpenPlate }: CoverHeroProp
                 <div className="flex items-center gap-3">
                   <span className="w-10 h-px bg-white/60"></span>
                   <span className="font-label-editorial text-label-editorial tracking-[0.26em] uppercase text-[#e6e2dd]">
-                    Plate 01 — Provencal Villa
+                    Plate 01 — Dusk by the Sea
                   </span>
                 </div>
               </Reveal>

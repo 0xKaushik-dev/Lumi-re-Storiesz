@@ -1,6 +1,7 @@
 import { Story, Discipline, JournalArticle, MonographPlate } from '../types';
+import heroSunset from '../assets/hero-sunset.jpg';
 
-export const HERO_IMAGE = "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85";
+export const HERO_IMAGE = heroSunset;
 export const BANQUET_IMAGE = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=85";
 export const HANDS_RINGS_IMAGE = "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=85";
 export const STATIONERY_IMAGE = "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=85";
@@ -302,15 +303,15 @@ export const MONOGRAPH_PLATES: MonographPlate[] = [
   {
     id: 1,
     plateNumber: 'Plate 01',
-    title: 'Stillness at the French Casement',
-    location: 'Provence Villa, France',
+    title: 'Dusk Reflections by the Sea',
+    location: 'Coastal Horizon',
     year: '2026',
     image: HERO_IMAGE,
     camera: 'Contax 645',
     lens: 'Carl Zeiss 80mm f/2.0 Planar',
-    filmStock: 'Kodak Portra 160',
-    aspect: '4:5 Vertical',
-    caption: 'Soft diffused morning illumination catching the hand-loomed veil by the arched limestone window.'
+    filmStock: 'Kodak Portra 400',
+    aspect: '16:9 Horizontal',
+    caption: 'Two figures seated on a seaside bench at dusk, watching the golden sun dip beneath the ocean horizon.'
   },
   {
     id: 2,

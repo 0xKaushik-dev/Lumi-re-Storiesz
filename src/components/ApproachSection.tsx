@@ -75,7 +75,7 @@ export default function ApproachSection({ onOpenPhilosophyModal }: ApproachSecti
           <Reveal delay={0.2} duration={0.8} y={20} className="w-full">
             <div className="relative w-full aspect-[4/5] max-w-xl mx-auto overflow-hidden bg-[#efeeeb] border border-[#cac6bd]/40 group">
               <img
-                alt="Bride preparing by tall arched casement window in Provence"
+                alt="Two figures watching golden sunset by the sea"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover grayscale contrast-[1.05] group-hover:grayscale-0 transition-all duration-700"
