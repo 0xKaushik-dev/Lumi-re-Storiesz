@@ -51,6 +51,7 @@ export default function CoverHero({ onExploreClick, onOpenPlate }: CoverHeroProp
           <img
             alt="Lumière Stories cover bridal portrait"
             loading="eager"
+            fetchPriority="high"
             decoding="async"
             className="w-full h-full object-cover object-center scale-[1.01] transition-transform duration-1000 ease-out group-hover:scale-105 will-change-transform"
             src={HERO_IMAGE}

@@ -1,44 +1,7 @@
-import React, { ElementType, useState, useEffect, useRef } from 'react';
+import React, { ElementType, useEffect, useRef } from 'react';
 
 // Premium editorial cubic-bezier easing curve
 export const EDITORIAL_EASE = [0.22, 1, 0.36, 1] as const;
-
-// Global single-instance IntersectionObserver for zero layout-thrashing scroll reveals
-type ObserverCallback = (entry: IntersectionObserverEntry) => void;
-let globalObserver: IntersectionObserver | null = null;
-const observerCallbacks = new Map<Element, ObserverCallback>();
-
-function getGlobalObserver(): IntersectionObserver | null {
-  if (typeof window === 'undefined') return null;
-  if (!globalObserver) {
-    globalObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const cb = observerCallbacks.get(entry.target);
-          if (cb) cb(entry);
-        });
-      },
-      {
-        threshold: 0.01,
-        rootMargin: '50px 0px 50px 0px',
-      }
-    );
-  }
-  return globalObserver;
-}
-
-function observeElement(element: Element, callback: ObserverCallback) {
-  const observer = getGlobalObserver();
-  if (!observer) return () => {};
-
-  observerCallbacks.set(element, callback);
-  observer.observe(element);
-
-  return () => {
-    observerCallbacks.delete(element);
-    observer.unobserve(element);
-  };
-}
 
 export interface RevealProps {
   children: React.ReactNode;
@@ -52,48 +15,11 @@ export interface RevealProps {
 
 export function Reveal({
   children,
-  delay = 0,
-  duration = 0.7,
-  y = 24,
   className = '',
   as = 'div',
-  once = true,
 }: RevealProps) {
-  const [isRevealed, setIsRevealed] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    // Native observer registration without synchronous forced reflows (no getBoundingClientRect)
-    const unobserve = observeElement(el, (entry) => {
-      if (entry.isIntersecting) {
-        setIsRevealed(true);
-        if (once) unobserve();
-      } else if (!once) {
-        setIsRevealed(false);
-      }
-    });
-
-    return unobserve;
-  }, [once]);
-
   const Component = (as as any) || 'div';
-
-  return (
-    <Component
-      ref={ref}
-      className={`reveal-base ${isRevealed ? 'is-revealed' : ''} ${className}`}
-      style={{
-        transitionDelay: `${delay}s`,
-        transitionDuration: `${duration}s`,
-        transform: isRevealed ? 'translate3d(0, 0, 0)' : `translate3d(0, ${y}px, 0)`,
-      }}
-    >
-      {children}
-    </Component>
-  );
+  return <Component className={className}>{children}</Component>;
 }
 
 export interface StaggerContainerProps {
@@ -107,46 +33,11 @@ export interface StaggerContainerProps {
 
 export function StaggerContainer({
   children,
-  staggerDelay = 0.12,
-  delayChildren = 0,
   className = '',
   as = 'div',
-  once = true,
 }: StaggerContainerProps) {
-  const [isRevealed, setIsRevealed] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const unobserve = observeElement(el, (entry) => {
-      if (entry.isIntersecting) {
-        setIsRevealed(true);
-        if (once) unobserve();
-      } else if (!once) {
-        setIsRevealed(false);
-      }
-    });
-
-    return unobserve;
-  }, [once]);
-
   const Component = (as as any) || 'div';
-
-  return (
-    <Component ref={ref} className={className}>
-      {React.Children.map(children, (child, idx) => {
-        if (!React.isValidElement(child)) return child;
-        return React.cloneElement(child as React.ReactElement<any>, {
-          isParentVisible: isRevealed,
-          staggerIndex: idx,
-          staggerDelay,
-          delayChildren,
-        });
-      })}
-    </Component>
-  );
+  return <Component className={className}>{children}</Component>;
 }
 
 export interface StaggerItemProps {
@@ -163,30 +54,11 @@ export interface StaggerItemProps {
 
 export function StaggerItem({
   children,
-  y = 24,
-  duration = 0.7,
   className = '',
   as = 'div',
-  isParentVisible = true,
-  staggerIndex = 0,
-  staggerDelay = 0.12,
-  delayChildren = 0,
 }: StaggerItemProps) {
   const Component = (as as any) || 'div';
-  const calculatedDelay = delayChildren + staggerIndex * staggerDelay;
-
-  return (
-    <Component
-      className={`reveal-base ${isParentVisible ? 'is-revealed' : ''} ${className}`}
-      style={{
-        transitionDelay: `${calculatedDelay}s`,
-        transitionDuration: `${duration}s`,
-        transform: isParentVisible ? 'translate3d(0, 0, 0)' : `translate3d(0, ${y}px, 0)`,
-      }}
-    >
-      {children}
-    </Component>
-  );
+  return <Component className={className}>{children}</Component>;
 }
 
 // 2. Standard Responsive Image Container
@@ -206,7 +78,7 @@ export function ParallaxImage({
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+        className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-105"
       />
     </div>
   );
@@ -223,7 +95,7 @@ export function AnimateModalContainer({
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 bg-[#0e0d0b]/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-fadeIn"
+      className="fixed inset-0 z-50 bg-[#0e0d0b]/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -249,17 +121,19 @@ export function MarqueeText({ text }: { text: string }) {
   );
 }
 
-// 5. Custom Editorial Optical Viewfinder Ring / Floating Cursor Indicator
+// 5. Zero-Re-render High Performance Optical Viewfinder Cursor
 export function OpticalCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [hovered, setHovered] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let animFrame: number;
+    const el = cursorRef.current;
+    if (!el) return;
+
     let targetX = -100;
     let targetY = -100;
     let currentX = -100;
     let currentY = -100;
+    let animFrame: number;
 
     const handleMouseMove = (e: MouseEvent) => {
       targetX = e.clientX;
@@ -269,13 +143,24 @@ export function OpticalCursor() {
       const isInteractive = Boolean(
         target?.closest('a, button, [role="button"], img, .group, .cursor-pointer')
       );
-      setHovered((prev) => (prev !== isInteractive ? isInteractive : prev));
+
+      if (isInteractive) {
+        el.style.width = '46px';
+        el.style.height = '46px';
+        el.style.borderColor = '#6b5c4d';
+        el.style.backgroundColor = 'rgba(244, 223, 204, 0.15)';
+      } else {
+        el.style.width = '24px';
+        el.style.height = '24px';
+        el.style.borderColor = 'rgba(107, 92, 77, 0.4)';
+        el.style.backgroundColor = 'transparent';
+      }
     };
 
     const render = () => {
-      currentX += (targetX - currentX) * 0.2;
-      currentY += (targetY - currentY) * 0.2;
-      setPos({ x: currentX, y: currentY });
+      currentX += (targetX - currentX) * 0.25;
+      currentY += (targetY - currentY) * 0.25;
+      el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
       animFrame = requestAnimationFrame(render);
     };
 
@@ -290,14 +175,13 @@ export function OpticalCursor() {
 
   return (
     <div
+      ref={cursorRef}
       aria-hidden="true"
       className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-[#6b5c4d]/60 hidden md:block transition-[width,height,background-color,border-color] duration-150 ease-out"
       style={{
-        transform: `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%)`,
-        width: hovered ? 46 : 24,
-        height: hovered ? 46 : 24,
-        borderColor: hovered ? '#6b5c4d' : 'rgba(107, 92, 77, 0.4)',
-        backgroundColor: hovered ? 'rgba(244, 223, 204, 0.15)' : 'transparent',
+        transform: 'translate3d(-100px, -100px, 0) translate(-50%, -50%)',
+        width: 24,
+        height: 24,
       }}
     />
   );

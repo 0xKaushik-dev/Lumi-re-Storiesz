@@ -155,42 +155,20 @@
 }
 
 html {
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 100%;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scroll-behavior: smooth;
 }
 
 body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 100%;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #faf9f6;
+  color: #1a1c1a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
-/* Hardware-accelerated CSS reveal classes */
 .reveal-base {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-base.is-revealed {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
 }
 
 /* Eliminate transform layout flickering across browsers */
